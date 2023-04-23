@@ -1,5 +1,5 @@
 import "./style.scss"
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 function App() {
 
@@ -7,13 +7,36 @@ function App() {
         e.preventDefault()
     }
 
+    const sliderRef = useRef(document.createElement("div"))
+    const [slider, setSlider] = useState(sliderRef.current.offsetLeft)
+
+    useEffect(() => {
+        setSlider(sliderRef.current.offsetLeft)
+    }, [])
+
+    useEffect(() => {
+        sliderRef.current.style.left = slider + "px"
+    }, [slider])
+
+    const handleNavClick = (e: React.MouseEvent<HTMLLIElement>) => {
+        e.preventDefault()
+        setSlider(e.currentTarget.offsetLeft)
+    }
+
+    const NavElement = ({name, link}: {name: string, link: string}) => {
+        return (
+            <li onClick={handleNavClick}> <a href={link}> {name} </a></li>
+        )
+    }
+
     return (
     <header>
         <nav>
             <ul>
-                <li> <a href="/">Home</a> </li>
-                <li> <a href="/about">About</a> </li>
-                <li> <a href="/contact">Contact</a> </li>
+                <NavElement name="Home" link="/"/>
+                <NavElement name="About" link="/about"/>
+                <NavElement name="Contact" link="/contact"/>
+                <div className="slide" ref={sliderRef}/>
             </ul>
         </nav>
         <main>
