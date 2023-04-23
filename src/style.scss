@@ -93,10 +93,9 @@ main {
 
 .photo {
   div {
-    width: 300px;
+    width: auto;
     height: 300px;
-    border-radius: 50%;
-    overflow: hidden;
+    //overflow: hidden;
   }
 
   .first-circle:before{
@@ -111,8 +110,9 @@ main {
     outline-offset: 20px;
   }
 
-
   img {
+    mask: url("./assets/mask-logo3.png") center no-repeat;
+    mask-size: cover;
     width: 100%;
     height: 100%;
     object-fit: cover;
