@@ -1,5 +1,6 @@
 import "./style.scss"
 import React, {useEffect, useRef, useState} from "react";
+import {FaGithub, FaInstagram} from "react-icons/fa";
 
 function App() {
 
@@ -15,12 +16,37 @@ function App() {
     }, [])
 
     useEffect(() => {
-        sliderRef.current.style.left = slider + "px"
+        animateMoveTo(sliderRef.current, slider, 500)
     }, [slider])
 
     const handleNavClick = (e: React.MouseEvent<HTMLLIElement>) => {
         e.preventDefault()
         setSlider(e.currentTarget.offsetLeft)
+    }
+
+    const easeInOutQuad = (currentTime: number, start: number, change: number, duration: number) => {
+        currentTime /= duration / 2
+        if (currentTime < 1) {
+            return change / 2 * currentTime * currentTime + start
+        }
+        currentTime--
+        return -change / 2 * (currentTime * (currentTime - 2) - 1) + start
+    }
+
+    const animateMoveTo = (element: HTMLElement, to: number, duration: number) => {
+        const start = element.offsetLeft
+        const change = to - start
+        const increment = 10
+        let currentTime = 0
+
+        const animateScroll = () => {
+            currentTime += increment
+            element.style.left = easeInOutQuad(currentTime, start, change, duration) + "px"
+            if (currentTime < duration) {
+                setTimeout(animateScroll, increment)
+            }
+        }
+        animateScroll()
     }
 
     const NavElement = ({name, link}: {name: string, link: string}) => {
@@ -41,6 +67,7 @@ function App() {
         </nav>
         <main>
                 <div className="title">
+                    <div className="dots"/>
                     <div>
                         <h1> Hello World </h1>
                         <h2> Wiktor Popiołek </h2>
@@ -59,6 +86,17 @@ function App() {
                     </div>
                 </div>
         </main>
+        <div className="add">
+            <div className="dots-bottom">
+                <div className="dot"/>
+                <div className="dot"/>
+                <div className="dot"/>
+            </div>
+            <div className="icons">
+                <a><FaGithub/></a>
+                <a><FaInstagram/></a>
+            </div>
+        </div>
     </header>
   )
 }
