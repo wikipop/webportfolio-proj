@@ -17,7 +17,6 @@ function App() {
             </ul>
         </nav>
         <main>
-            <div>
                 <div className="title">
                     <div>
                         <h1> Hello World </h1>
@@ -30,11 +29,12 @@ function App() {
                     </div>
                 </div>
                 <div className="photo">
-                    <img src="https://cdn.discordapp.com/avatars/393756120952602625/2caac8389fb62044770e1ac81fdbbc60.webp?size=320"
-                         alt="profile picture"
-                    />
+                    <div className="first-circle">
+                        <img src="https://cdn.discordapp.com/avatars/393756120952602625/2caac8389fb62044770e1ac81fdbbc60.webp?size=320"
+                             alt="profile picture"
+                        />
+                    </div>
                 </div>
-            </div>
         </main>
     </header>
   )
