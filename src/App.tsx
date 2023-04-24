@@ -1,5 +1,5 @@
 import "./style.scss"
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {FaGithub, FaInstagram} from "react-icons/fa";
 
 function App() {
@@ -10,19 +10,7 @@ function App() {
 
     const sliderRef = useRef(document.createElement("div"))
     const [slider, setSlider] = useState(sliderRef.current.offsetLeft)
-
-    useEffect(() => {
-        setSlider(sliderRef.current.offsetLeft)
-    }, [])
-
-    useEffect(() => {
-        animateMoveTo(sliderRef.current, slider, 500)
-    }, [slider])
-
-    const handleNavClick = (e: React.MouseEvent<HTMLLIElement>) => {
-        e.preventDefault()
-        setSlider(e.currentTarget.offsetLeft)
-    }
+    const [isReadyCtx, setIsReadyCtx] = useState(false)
 
     const easeInOutQuad = (currentTime: number, start: number, change: number, duration: number) => {
         currentTime /= duration / 2
@@ -34,6 +22,8 @@ function App() {
     }
 
     const animateMoveTo = (element: HTMLElement, to: number, duration: number) => {
+        if (element.offsetLeft === to) return
+
         const start = element.offsetLeft
         const change = to - start
         const increment = 10
@@ -49,11 +39,27 @@ function App() {
         animateScroll()
     }
 
+    const handleNavClick = (e: React.MouseEvent<HTMLLIElement>) => {
+        e.preventDefault()
+        setSlider(e.currentTarget.offsetLeft)
+    }
+
     const NavElement = ({name, link}: {name: string, link: string}) => {
         return (
             <li onClick={handleNavClick}> <a href={link}> {name} </a></li>
         )
     }
+
+    useEffect(() => {
+        setSlider(sliderRef.current.offsetLeft)
+        setIsReadyCtx(true)
+    }, [])
+
+    useEffect(() => {
+        if (isReadyCtx) {
+            animateMoveTo(sliderRef.current, slider, 500)
+        }
+    }, [slider])
 
     return (
     <header>
