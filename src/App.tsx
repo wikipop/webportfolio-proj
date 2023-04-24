@@ -62,48 +62,51 @@ function App() {
     }, [slider])
 
     return (
-    <header>
-        <nav>
-            <ul>
-                <NavElement name="Home" link="/"/>
-                <NavElement name="About" link="/about"/>
-                <NavElement name="Contact" link="/contact"/>
-                <div className="slide" ref={sliderRef}/>
-            </ul>
-        </nav>
-        <main>
-                <div className="title">
-                    <div className="dots"/>
-                    <div>
-                        <h1> Hello World </h1>
-                        <h2> Wiktor Popiołek </h2>
-                        <h3> Web developer </h3>
+        <>
+            <header>
+                <nav>
+                    <ul>
+                        <NavElement name="Home" link="/"/>
+                        <NavElement name="About" link="/about"/>
+                        <NavElement name="Contact" link="/contact"/>
+                        <div className="slide" ref={sliderRef}/>
+                    </ul>
+                </nav>
+                <main>
+                        <div className="title">
+                            <div className="dots"/>
+                            <div>
+                                <h1> Hello World </h1>
+                                <h2> Wiktor Popiołek </h2>
+                                <h3> Web developer </h3>
+                            </div>
+                            <div>
+                                <button onClick={buttonAction}>Action 1</button>
+                                <button onClick={buttonAction}>Action 2</button>
+                            </div>
+                        </div>
+                        <div className="photo">
+                            <div className="first-circle">
+                                <img src="https://cdn.discordapp.com/avatars/393756120952602625/2caac8389fb62044770e1ac81fdbbc60.webp?size=320"
+                                    alt="profile picture"
+                                />
+                            </div>
+                        </div>
+                </main>
+                <div className="add">
+                    <div className="dots-bottom">
+                        <div className="dot"/>
+                        <div className="dot"/>
+                        <div className="dot"/>
                     </div>
-                    <div>
-                        <button onClick={buttonAction}>Action 1</button>
-                        <button onClick={buttonAction}>Action 2</button>
+                    <div className="icons">
+                        <a><FaGithub/></a>
+                        <a><FaInstagram/></a>
                     </div>
                 </div>
-                <div className="photo">
-                    <div className="first-circle">
-                        <img src="https://cdn.discordapp.com/avatars/393756120952602625/2caac8389fb62044770e1ac81fdbbc60.webp?size=320"
-                             alt="profile picture"
-                        />
-                    </div>
-                </div>
-        </main>
-        <div className="add">
-            <div className="dots-bottom">
-                <div className="dot"/>
-                <div className="dot"/>
-                <div className="dot"/>
-            </div>
-            <div className="icons">
-                <a><FaGithub/></a>
-                <a><FaInstagram/></a>
-            </div>
-        </div>
-    </header>
+        </header>
+        <div className="content"></div> 
+    </>
   )
 }
 
